@@ -3,7 +3,7 @@ package org.example.entity;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-public class WareHouse  extends abstractStorage {
+public class WareHouse extends abstractStorage {
     private String description;
 
     public WareHouse() {
@@ -21,19 +21,29 @@ public class WareHouse  extends abstractStorage {
     public void setDescription(String description) {
         this.description = description;
     }
+
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Định dạng ngày-tháng-năm
         String createdFormatted = (getCreated() != null) ? sdf.format(getCreated()) : "N/A";
 
-        return "WareHouse{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", isActive=" + isActive() +
-                ", createBy='" + getCreateBy() + '\'' +
-                ", created=" + createdFormatted +
-                ", description='" + description + '\'' +
-                '}';
+        return String.format(
+                "WareHouse {\n" +
+                        "    id         : %d\n" +
+                        "    name       : '%s'\n" +
+                        "    isActive   : %b\n" +
+                        "    createBy   : '%s'\n" +
+                        "    created    : %s\n" +
+                        "    description: '%s'\n" +
+                        "}",
+                getId(),
+                getName(),
+                isActive(),
+                getCreateBy(),
+                createdFormatted,
+                description
+        );
     }
+
 }
 

@@ -56,16 +56,28 @@ public class locators extends abstractStorage {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Định dạng ngày-tháng-năm
         String createdFormatted = (getCreated() != null) ? sdf.format(getCreated()) : "N/A";
 
-        return "locators{" +
-                "id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", isActive=" + isActive() +
-                ", createBy='" + getCreateBy() + '\'' +
-                ", created=" + createdFormatted +
-                ", x=" + x +
-                ", y=" + y +
-                ", z=" + z +
-                ", idWareHouse=" + idWareHouse +
-                '}';
+        return String.format(
+                "Locators {\n" +
+                        "    id          : %d\n" +
+                        "    name        : '%s'\n" +
+                        "    isActive    : %b\n" +
+                        "    createBy    : '%s'\n" +
+                        "    created     : %s\n" +
+                        "    x           : %.2f\n" +
+                        "    y           : %.2f\n" +
+                        "    z           : %.2f\n" +
+                        "    idWareHouse : %d\n" +
+                        "}",
+                getId(),
+                getName(),
+                isActive(),
+                getCreateBy(),
+                createdFormatted,
+                x,
+                y,
+                z,
+                idWareHouse
+        );
     }
+
 }

@@ -5,15 +5,21 @@ import org.example.utils.productType;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-public class productComBo extends abstractProduct{
+public class productItem extends abstractProduct{
     private int qtyStock;
     private int idlocator;
     private int idProductParent;
 
-    public productComBo() {
+    public productItem() {
     }
 
-    public productComBo(int id, String name, boolean isActive, String createBy, Timestamp created, productType type, int qtyStock, int idlocator, int idProductParent) {
+    public productItem(int qtyStock, int idlocator, int idProductParent) {
+        this.qtyStock = qtyStock;
+        this.idlocator = idlocator;
+        this.idProductParent = idProductParent;
+    }
+
+    public productItem(int id, String name, boolean isActive, String createBy, Timestamp created, productType type, int qtyStock, int idlocator, int idProductParent) {
         super(id, name, isActive, createBy, created, type);
         this.qtyStock = qtyStock;
         this.idlocator = idlocator;
@@ -43,14 +49,13 @@ public class productComBo extends abstractProduct{
     public void setIdProductParent(int idProductParent) {
         this.idProductParent = idProductParent;
     }
-
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Định dạng ngày-tháng-năm
         String createdFormatted = (getCreated() != null) ? sdf.format(getCreated()) : "N/A";
 
         return String.format(
-                "ProductCombo {\n" +
+                "ProductItem {\n" +
                         "    id               : %d\n" +
                         "    name             : '%s'\n" +
                         "    isActive         : %s\n" +
@@ -68,7 +73,7 @@ public class productComBo extends abstractProduct{
                 createdFormatted,
                 qtyStock,
                 idlocator,
-                productType.combo.toString(), // Giả sử productType là một enum hoặc một đối tượng có phương thức toString()
+                productType.item.toString(), // Giả sử `productType` là một enum hoặc một đối tượng có phương thức `toString()`
                 idProductParent
         );
     }

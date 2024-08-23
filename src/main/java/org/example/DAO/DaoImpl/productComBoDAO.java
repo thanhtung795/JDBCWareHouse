@@ -26,6 +26,18 @@ public class productComBoDAO implements WareHouseRepository<productComBo> {
             " product_parent_id)\n" +
             " VALUES \n" +
             " (?,?,?,?,?,?,?) ";
+    private static final String update_product_combo = " update product \n" +
+            " set " +
+            " name = ?,\n" +
+            " is_active = ?,\n" +
+            " locator_id = ?,\n" +
+            " created = ?,\n" +
+            " create_by = ?,\n" +
+            " qty_stock = ?,\n" +
+            " product_parent_id = ?\n" +
+            " where id = ? and product_type = ?";
+    private static final String delete_product_combo = " delete from product" +
+            " where id = ?";
 
     @Override
     public void insert(productComBo productComBo) {
@@ -48,12 +60,36 @@ public class productComBoDAO implements WareHouseRepository<productComBo> {
 
     @Override
     public void update(productComBo productComBo) {
-
+        try {
+            JpaHelper.executeUpdate(update_product_combo,
+                    productComBo.getName(),
+                    productComBo.isActive(),
+                    productComBo.getIdlocator(),
+                    productComBo.getCreated(),
+                    productComBo.getCreateBy(),
+                    productComBo.getQtyStock(),
+                    productComBo.getIdProductParent(),
+                    productComBo.getId(),
+                    productComBo.getType().name()
+            );
+            System.out.println("Product com bo updated successfully");
+        } catch (Exception e) {
+            System.out.println("Product com bo update failed");
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deletebyid(int id) {
-
+        try {
+            JpaHelper.executeUpdate(delete_product_combo,
+                    id
+            );
+            System.out.println("Product com bo deleted by id: " + id);
+        } catch (Exception e) {
+            System.out.println("Product com bo delete failed");
+            e.printStackTrace();
+        }
     }
 
     @Override
