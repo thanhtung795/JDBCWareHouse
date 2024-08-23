@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WareHouseRepository<T>{
-    void insert(T t) throws SQLException;
+    void insert(T t);
     void update(T t);
     void deletebyid(int id);
-    List<T> getAll() throws SQLException;
+    List<T> getAll();
     Optional<T> getById(int id);
 
 }

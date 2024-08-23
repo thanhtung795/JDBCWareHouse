@@ -1,55 +1,23 @@
 package org.example.entity;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
-public class locators {
-    private int id;
-    private String name;
-    private boolean isActive;
+public class locators extends abstractStorage {
     private Double x;
     private Double y;
     private Double z;
-    private Timestamp created;
-    private String createBy;
-    private int wareHouse;
+    private int idWareHouse;
 
     public locators() {
     }
 
-    public locators(int id, String name, boolean isActive, Double x, Double y, Double z, Timestamp created, String createBy, int wareHouse) {
-        this.id = id;
-        this.name = name;
-        this.isActive = isActive;
+    public locators(int id, String name, boolean isActive, String createBy, Timestamp created, Double x, Double y, Double z, int idWareHouse) {
+        super(id, name, isActive, createBy, created);
         this.x = x;
         this.y = y;
         this.z = z;
-        this.created = created;
-        this.createBy = createBy;
-        this.wareHouse = wareHouse;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
+        this.idWareHouse = idWareHouse;
     }
 
     public Double getX() {
@@ -76,27 +44,28 @@ public class locators {
         this.z = z;
     }
 
-    public Timestamp getCreated() {
-        return created;
+    public int getIdWareHouse() {
+        return idWareHouse;
     }
 
-    public void setCreated(Timestamp created) {
-        this.created = created;
+    public void setIdWareHouse(int idWareHouse) {
+        this.idWareHouse = idWareHouse;
     }
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Định dạng ngày-tháng-năm
+        String createdFormatted = (getCreated() != null) ? sdf.format(getCreated()) : "N/A";
 
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public int getWareHouse() {
-        return wareHouse;
-    }
-
-    public void setWareHouse(int wareHouse) {
-        this.wareHouse = wareHouse;
+        return "locators{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", isActive=" + isActive() +
+                ", createBy='" + getCreateBy() + '\'' +
+                ", created=" + createdFormatted +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", idWareHouse=" + idWareHouse +
+                '}';
     }
 }

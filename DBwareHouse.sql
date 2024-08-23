@@ -151,4 +151,44 @@ set name = 'kho TPHCM',
  description = 'kho chua laptop', 
  create_by = 'Quang',
  created = '2024-08-22 12:56:08'
- where id = 34
+ where id = 34;
+ 
+ 
+delete from warehouse where id = 35;
+
+select
+ id,
+ name,
+ is_active
+ ,x,y,z,
+ created,
+ create_by,
+ warehouse_id
+ from locators;
+ 
+ 
+ INSERT INTO locators
+    (name, is_active, x, y, z, create_by, warehouse_id)
+VALUES 
+    ("Kệ A1 - Kho TPHCM",
+     true,
+	10.5, 20.3, 30.7,
+     "Thanh", 
+     2);
+
+update locators 
+set name = "Kệ A1 - Kho Nghe An",
+is_active = 0,
+x = 220,
+y = 103,
+z = 301,
+created = '2024-08-22 11:37:16',
+create_by = 'Long',
+warehouse_id = 3
+where id = 31;
+
+delete from locators 
+where id = 32;
+
+
+select * from product where product_type = 'combo';
