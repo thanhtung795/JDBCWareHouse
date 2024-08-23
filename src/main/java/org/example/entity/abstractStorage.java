@@ -3,6 +3,7 @@ package org.example.entity;
 import org.example.utils.productType;
 
 import java.sql.Timestamp;
+import java.util.Scanner;
 
 public abstract class abstractStorage {
     private int id;
@@ -61,5 +62,29 @@ public abstract class abstractStorage {
 
     public void setCreated(Timestamp created) {
         this.created = created;
+    }
+    public void input(Scanner sc) {
+        System.out.print("Enter Name: ");
+        this.name = sc.nextLine();
+        System.out.print("Enter Created By: ");
+        this.createBy = sc.nextLine();
+        System.out.println("1. Đang hoạt động - 2. Ngừng hoạt động ");
+        System.out.print("You have chosen: ");
+        int statusChoice = sc.nextInt();
+        sc.nextLine();
+
+        switch (statusChoice) {
+            case 1:
+                this.isActive = true;
+                break;
+            case 2:
+                this.isActive = false;
+                break;
+            default:
+                System.out.println("Invalid choice. Setting status to inactive.");
+                this.isActive = false;
+                break;
+        }
+
     }
 }

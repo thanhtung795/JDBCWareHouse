@@ -35,6 +35,10 @@ public class WareHouseDAO implements WareHouseRepository<WareHouse> {
             " where id = ?";
     private static final String delete_WareHouse = "delete from warehouse where id = ?";
 
+    private static final String select_by_id = "select * from " +
+            " warehouse" +
+            " where id = ?";
+
     @Override
     public void insert(WareHouse wareHouse) {
         try {
@@ -105,6 +109,21 @@ public class WareHouseDAO implements WareHouseRepository<WareHouse> {
 
     @Override
     public Optional<WareHouse> getById(int id) {
+        try {
+            ResultSet rs = JpaHelper.executeQuery(select_by_id, id);
+            while (rs.next()) {
+                WareHouse wareHouse = new WareHouse();
+                wareHouse.setId(rs.getInt("id"));
+                wareHouse.setName(rs.getString("name"));
+                wareHouse.setActive(rs.getBoolean("is_active"));
+                wareHouse.setDescription(rs.getString("description"));
+                wareHouse.setCreateBy(rs.getString("create_by"));
+                wareHouse.setCreated(rs.getTimestamp("created"));
+                return Optional.of(wareHouse);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
 }

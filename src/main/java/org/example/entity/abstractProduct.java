@@ -3,8 +3,9 @@ package org.example.entity;
 import org.example.utils.productType;
 
 import java.sql.Timestamp;
+import java.util.Scanner;
 
-public abstract class abstractProduct {
+public abstract class abstractProduct{
     private int id;
     private String name;
     private boolean isActive;
@@ -71,5 +72,8 @@ public abstract class abstractProduct {
 
     public void setType(productType type) {
         this.type = type;
+    }
+    public void input( Scanner sc){
+
     }
 }

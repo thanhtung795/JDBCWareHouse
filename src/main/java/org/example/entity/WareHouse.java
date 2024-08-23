@@ -2,6 +2,7 @@ package org.example.entity;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class WareHouse extends abstractStorage {
     private String description;
@@ -44,6 +45,10 @@ public class WareHouse extends abstractStorage {
                 description
         );
     }
-
+    public void input(Scanner sc) {
+        super.input(sc);
+        System.out.print("Enter description: ");
+        this.description = sc.nextLine();
+    }
 }
 

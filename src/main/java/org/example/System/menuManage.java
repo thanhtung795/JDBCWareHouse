@@ -1,15 +1,16 @@
 package org.example.System;
 
-import org.example.DAO.DaoImpl.WareHouseDAO;
-import org.example.controller.ctrlLocators;
-import org.example.controller.ctrlProductCombo;
-import org.example.controller.ctrlProductItem;
-import org.example.controller.ctrlWareHouse;
+import org.example.controller.ctrlImpl.ctrlLocators;
+import org.example.controller.ctrlImpl.ctrlProductCombo;
+import org.example.controller.ctrlImpl.ctrlProductItem;
+import org.example.controller.ctrlImpl.ctrlWareHouse;
 
 import java.util.Scanner;
 
 public class menuManage {
     static Scanner sc = new Scanner(System.in);
+    static ctrlWareHouse ctrlWarehouse = new ctrlWareHouse();
+    static ctrlLocators ctrlLocators = new ctrlLocators();
 
     // Main Menu
     public void menuMain() {
@@ -41,8 +42,16 @@ public class menuManage {
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    ctrlWareHouse ctrlWarehouse = new ctrlWareHouse();
                     ctrlWarehouse.read();
+                    break;
+                case 2:
+                    ctrlWarehouse.create();
+                    break;
+                case 3:
+                    ctrlWarehouse.update();
+                    break;
+                case 4:
+                    ctrlWarehouse.delete();
                     break;
                 case 5:
                     running = false;
@@ -73,8 +82,16 @@ public class menuManage {
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    ctrlLocators ctrlLocators = new ctrlLocators();
                     ctrlLocators.read();
+                    break;
+                case 2:
+                    ctrlLocators.create();
+                    break;
+                case 3:
+                    ctrlLocators.update();
+                    break;
+                case 4:
+                    ctrlLocators.delete();
                     break;
                 case 5:
                     running = false;

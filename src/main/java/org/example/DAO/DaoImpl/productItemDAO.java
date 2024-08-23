@@ -1,6 +1,7 @@
 package org.example.DAO.DaoImpl;
 
 import org.example.DAO.WareHouseRepository;
+import org.example.entity.locators;
 import org.example.entity.productItem;
 import org.example.utils.JpaHelper;
 import org.example.utils.productType;
@@ -55,7 +56,8 @@ public class productItemDAO implements WareHouseRepository {
     }
 
     @Override
-    public Optional getById(int id) {
+    public Optional<locators> getById(int id) {
+
         return Optional.empty();
     }
 }

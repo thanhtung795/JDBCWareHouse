@@ -1,11 +1,12 @@
-package org.example.controller;
+package org.example.controller.ctrlImpl;
 
 import org.example.DAO.DaoImpl.productComBoDAO;
+import org.example.controller.ctrlActive;
 import org.example.entity.productComBo;
 
 import java.util.List;
 
-public class ctrlProductCombo implements ctrlActive{
+public class ctrlProductCombo implements ctrlActive {
     @Override
     public void read() {
         productComBoDAO dao = new productComBoDAO();

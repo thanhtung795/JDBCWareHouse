@@ -2,6 +2,7 @@ package org.example.entity;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class locators extends abstractStorage {
     private Double x;
@@ -79,5 +80,15 @@ public class locators extends abstractStorage {
                 idWareHouse
         );
     }
-
+    public void input(Scanner sc) {
+        super.input(sc);
+        System.out.print("Enter x: ");
+        this.x = sc.nextDouble();
+        System.out.print("Enter y: ");
+        this.y = sc.nextDouble();
+        System.out.print("Enter z: ");
+        this.z = sc.nextDouble();
+        System.out.print("Enter id warehouse: ");
+        this.idWareHouse = sc.nextInt();
+    }
 }

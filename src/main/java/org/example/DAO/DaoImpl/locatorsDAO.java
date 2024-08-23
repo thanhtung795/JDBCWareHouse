@@ -1,6 +1,7 @@
 package org.example.DAO.DaoImpl;
 
 import org.example.DAO.WareHouseRepository;
+import org.example.entity.WareHouse;
 import org.example.entity.locators;
 import org.example.utils.JpaHelper;
 
@@ -35,6 +36,15 @@ public class locatorsDAO implements WareHouseRepository<locators> {
             " where id = ?";
     private static final String delete_locators = "delete from locators " +
             " where id = ?";
+    private static final String select_by_id = "select\n" +
+            " id,\n" +
+            " name,\n" +
+            " is_active\n" +
+            " ,x,y,z,\n" +
+            " created,\n" +
+            " create_by,\n" +
+            " warehouse_id\n" +
+            " from locators where id = ?";
 
     @Override
     public void insert(locators locators) {
@@ -113,7 +123,26 @@ public class locatorsDAO implements WareHouseRepository<locators> {
     }
 
     @Override
-    public Optional getById(int id) {
+    public Optional<locators> getById(int id) {
+        try {
+            ResultSet rs = JpaHelper.executeQuery(select_by_id, id);
+            while (rs.next()) {
+                locators locators = new locators();
+                locators.setId(rs.getInt("id"));
+                locators.setName(rs.getString("name"));
+                locators.setActive(rs.getBoolean("is_active"));
+                locators.setX(rs.getDouble("x"));
+                locators.setY(rs.getDouble("y"));
+                locators.setZ(rs.getDouble("z"));
+                locators.setCreated(rs.getTimestamp("created"));
+                locators.setCreateBy(rs.getString("create_by"));
+                locators.setIdWareHouse(rs.getInt("warehouse_id"));
+                return Optional.of(locators);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
+
 }
