@@ -4,44 +4,26 @@ import org.example.utils.productType;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class productComBo extends abstractProduct{
-    private int qtyStock;
-    private int idlocator;
-    private int idProductParent;
+
+    private productType productType;
 
     public productComBo() {
     }
 
-    public productComBo(int id, String name, boolean isActive, String createBy, Timestamp created, productType type, int qtyStock, int idlocator, int idProductParent) {
-        super(id, name, isActive, createBy, created, type);
-        this.qtyStock = qtyStock;
-        this.idlocator = idlocator;
-        this.idProductParent = idProductParent;
+    public productComBo(int id, String name, boolean isActive, String createBy, Timestamp created, int qtyStock, int idlocator, int idProductParent, org.example.utils.productType productType) {
+        super(id, name, isActive, createBy, created, qtyStock, idlocator, idProductParent);
+        this.productType = productType;
     }
 
-    public int getQtyStock() {
-        return qtyStock;
+    public org.example.utils.productType getProductType() {
+        return productType;
     }
 
-    public void setQtyStock(int qtyStock) {
-        this.qtyStock = qtyStock;
-    }
-
-    public int getIdlocator() {
-        return idlocator;
-    }
-
-    public void setIdlocator(int idlocator) {
-        this.idlocator = idlocator;
-    }
-
-    public int getIdProductParent() {
-        return idProductParent;
-    }
-
-    public void setIdProductParent(int idProductParent) {
-        this.idProductParent = idProductParent;
+    public void setProductType(org.example.utils.productType productType) {
+        this.productType = productType;
     }
 
     @Override
@@ -66,11 +48,14 @@ public class productComBo extends abstractProduct{
                 isActive() ? "Đang hoạt động" : "Ngừng hoạt động",
                 getCreateBy(),
                 createdFormatted,
-                qtyStock,
-                idlocator,
+                getQtyStock(),
+                getIdlocator(),
                 productType.combo.toString(), // Giả sử productType là một enum hoặc một đối tượng có phương thức toString()
-                idProductParent
+                getIdProductParent()
         );
     }
-
+    public void input(Scanner sc) {
+        super.input(sc);
+        this.productType = productType.combo;
+    }
 }

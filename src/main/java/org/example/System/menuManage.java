@@ -11,7 +11,8 @@ public class menuManage {
     static Scanner sc = new Scanner(System.in);
     static ctrlWareHouse ctrlWarehouse = new ctrlWareHouse();
     static ctrlLocators ctrlLocators = new ctrlLocators();
-
+    static ctrlProductCombo productCombo = new ctrlProductCombo();
+    static ctrlProductItem productItem = new ctrlProductItem();
     // Main Menu
     public void menuMain() {
         System.out.println("|======= System Menu =======|");
@@ -154,8 +155,16 @@ public class menuManage {
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    ctrlProductCombo productCombo = new ctrlProductCombo();
                     productCombo.read();
+                    break;
+                case 2:
+                    productCombo.create();
+                    break;
+                case 3:
+                    productCombo.update();
+                    break;
+                case 4:
+                    productCombo.delete();
                     break;
                 case 5:
                     running = false;
@@ -186,9 +195,16 @@ public class menuManage {
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    ctrlProductItem productItem = new ctrlProductItem();
                     productItem.read();
                     break;
+                case 2:
+                    productItem.create();
+                    break;
+                case 3:
+                    productItem.update();
+                    break;
+                case 4:
+                    productItem.delete();
                 case 5:
                     running = false;
                     System.out.println("You have returned to the menu product.");

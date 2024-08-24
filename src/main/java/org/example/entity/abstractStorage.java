@@ -85,6 +85,5 @@ public abstract class abstractStorage {
                 this.isActive = false;
                 break;
         }
-
     }
 }
