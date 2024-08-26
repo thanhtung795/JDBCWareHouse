@@ -62,4 +62,21 @@ public class ctrlWareHouse implements ctrlActive {
             System.out.println("Invalid input. Please enter again.");
         }
     }
+    public void getWareHouseByName(){
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter WareHouse Name");
+            String name = sc.nextLine();
+            List<WareHouse> list =  dao.getByName(name);
+            if (list != null) {
+                for (WareHouse WareHouse : list) {
+                    System.out.println(WareHouse);
+                }
+            }else {
+                System.out.println("WareHouse does not exist");
+            }
+        }catch (Exception e) {
+            System.out.println("Invalid input. Please enter again.");
+        }
+    }
 }

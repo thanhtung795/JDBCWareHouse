@@ -21,6 +21,7 @@ CREATE TABLE locators (
     create_by VARCHAR(50),
     warehouse_id INT,
     FOREIGN KEY (warehouse_id) REFERENCES warehouse(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE product (
@@ -31,11 +32,14 @@ CREATE TABLE product (
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     create_by VARCHAR(50),
     qty_stock INT,
-    product_type varchar(100) DEFAULT NULL,
+    product_type VARCHAR(100) DEFAULT NULL,
     product_parent_id INT,
-    FOREIGN KEY (locator_id) REFERENCES locators(id),
+    FOREIGN KEY (locator_id) REFERENCES locators(id)
+    ON DELETE CASCADE,
     FOREIGN KEY (product_parent_id) REFERENCES product(id)
+    ON DELETE CASCADE
 );
+
 INSERT INTO warehouse (name, is_active, description, create_by)
 VALUES
     ('Kho Hà Nội', true, 'Kho chính chứa hàng điện tử', 'Nguyễn Văn A'),
@@ -136,59 +140,3 @@ VALUES
 ('Tủ quần áo 4 cánh', 1, 14, 'Phạm Thị N', 20, 'item', NULL),
 ('Bộ ghế sofa da thật', 1, 15, 'Ngô Văn O', 15, 'combo', NULL),
 ('Bàn trà gỗ công nghiệp', 1, 15, 'Ngô Văn O', 20, 'item', 29);
-
-select id,
-name,
-is_active,
-description,
-create_by,
-created
- from warehouse;
-
-update warehouse 
-set name = 'kho TPHCM',
- is_active = true,
- description = 'kho chua laptop', 
- create_by = 'Quang',
- created = '2024-08-22 12:56:08'
- where id = 34;
- 
- 
-delete from warehouse where id = 35;
-
-select
- id,
- name,
- is_active
- ,x,y,z,
- created,
- create_by,
- warehouse_id
- from locators;
- 
- 
- INSERT INTO locators
-    (name, is_active, x, y, z, create_by, warehouse_id)
-VALUES 
-    ("Kệ A1 - Kho TPHCM",
-     true,
-	10.5, 20.3, 30.7,
-     "Thanh", 
-     2);
-
-update locators 
-set name = "Kệ A1 - Kho Nghe An",
-is_active = 0,
-x = 220,
-y = 103,
-z = 301,
-created = '2024-08-22 11:37:16',
-create_by = 'Long',
-warehouse_id = 3
-where id = 31;
-
-delete from locators 
-where id = 32;
-
-
-select * from product where product_type = 'combo';

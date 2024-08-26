@@ -2,6 +2,7 @@ package org.example.DAO.DaoImpl;
 
 import org.example.DAO.WareHouseRepository;
 import org.example.entity.WareHouse;
+import org.example.entity.locators;
 import org.example.utils.JpaHelper;
 
 import java.sql.Connection;
@@ -38,7 +39,7 @@ public class WareHouseDAO implements WareHouseRepository<WareHouse> {
     private static final String select_by_id = "select * from " +
             " warehouse" +
             " where id = ?";
-
+    private static final String SELECT_Warehouse_BY_NAME = "SELECT * FROM warehouse WHERE name LIKE ?";
     @Override
     public void insert(WareHouse wareHouse) {
         try {
@@ -125,5 +126,25 @@ public class WareHouseDAO implements WareHouseRepository<WareHouse> {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+    public List<WareHouse> getByName(String name) {
+        List<WareHouse> list = new ArrayList();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(SELECT_Warehouse_BY_NAME,
+                    "%" + name +"%");
+            while (rs.next()) {
+                WareHouse wareHouse = new WareHouse();
+                wareHouse.setId(rs.getInt("id"));
+                wareHouse.setName(rs.getString("name"));
+                wareHouse.setActive(rs.getBoolean("is_active"));
+                wareHouse.setDescription(rs.getString("description"));
+                wareHouse.setCreateBy(rs.getString("create_by"));
+                wareHouse.setCreated(rs.getTimestamp("created"));
+                list.add(wareHouse);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

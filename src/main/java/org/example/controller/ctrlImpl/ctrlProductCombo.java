@@ -3,6 +3,7 @@ package org.example.controller.ctrlImpl;
 import org.example.DAO.DaoImpl.productComBoDAO;
 import org.example.controller.ctrlActive;
 import org.example.entity.productComBo;
+import org.example.entity.productItem;
 
 import java.util.List;
 import java.util.Scanner;
@@ -54,6 +55,25 @@ public class ctrlProductCombo implements ctrlActive {
             System.out.println("delete failed");
             e.printStackTrace();
         }
-
+    }
+    public void listSortAsc() {
+        List<productComBo> list = dao.getItemSortAsc();
+        if (list.size()>0) {
+            for (productComBo productComBo : list) {
+                System.out.println(productComBo);
+            }
+        } else {
+            System.out.println("no item found");
+        }
+    }
+    public void listSortDesc() {
+        List<productComBo> list = dao.getItemSortDesc();
+        if (list.size()>0) {
+            for (productComBo productComBo : list) {
+                System.out.println(productComBo);
+            }
+        } else {
+            System.out.println("no item found");
+        }
     }
 }

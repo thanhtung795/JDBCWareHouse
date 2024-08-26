@@ -39,6 +39,11 @@ public class productItemDAO implements WareHouseRepository<productItem> {
     private static final String delete_product_citem = " delete from product" +
             " where id = ?";
     private static final String selectById = "SELECT * FROM product WHERE id = ?";
+
+    private static final String selectItemById = "SELECT * FROM product" +
+            " WHERE product_parent_id = ?";
+    private  static  final String select_produtsItem_ASC = "SELECT * FROM product where product_type = ? order by qty_stock asc";
+    private  static  final String select_produtsItem_DeSC = "SELECT * FROM product where product_type = ? order by qty_stock desc";
     @Override
     public void insert(productItem productItem) {
         try {
@@ -123,7 +128,7 @@ public class productItemDAO implements WareHouseRepository<productItem> {
                 item.setIdProductParent(rs.getInt("product_parent_id"));
                 list.add(item);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
@@ -151,4 +156,73 @@ public class productItemDAO implements WareHouseRepository<productItem> {
         return Optional.ofNullable(item);
     }
 
+    public List<productItem> selectItemByid(int id) {
+        List<productItem> list = new ArrayList<>();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(selectItemById,
+                    id
+            );
+            while (rs.next()) {
+                productItem item = new productItem();
+                item.setId(rs.getInt("id"));
+                item.setName(rs.getString("name"));
+                item.setActive(rs.getBoolean("is_active"));
+                item.setIdlocator(rs.getInt("locator_id"));
+                item.setCreated(rs.getTimestamp("created"));
+                item.setQtyStock(rs.getInt("qty_stock"));
+                item.setProductType(productType.valueOf(rs.getString("product_type")));
+                item.setIdProductParent(rs.getInt("product_parent_id"));
+                list.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public  List<productItem> getItemSortAsc(){
+        List<productItem> list = new ArrayList<>();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(select_produtsItem_ASC,
+                    productType.item.toString()
+            );
+            while (rs.next()) {
+                productItem item = new productItem();
+                item.setId(rs.getInt("id"));
+                item.setName(rs.getString("name"));
+                item.setActive(rs.getBoolean("is_active"));
+                item.setIdlocator(rs.getInt("locator_id"));
+                item.setCreated(rs.getTimestamp("created"));
+                item.setQtyStock(rs.getInt("qty_stock"));
+                item.setProductType(productType.valueOf(rs.getString("product_type")));
+                item.setIdProductParent(rs.getInt("product_parent_id"));
+                list.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public  List<productItem> getItemSortDesc(){
+        List<productItem> list = new ArrayList<>();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(select_produtsItem_DeSC,
+                    productType.item.toString()
+            );
+            while (rs.next()) {
+                productItem item = new productItem();
+                item.setId(rs.getInt("id"));
+                item.setName(rs.getString("name"));
+                item.setActive(rs.getBoolean("is_active"));
+                item.setIdlocator(rs.getInt("locator_id"));
+                item.setCreated(rs.getTimestamp("created"));
+                item.setQtyStock(rs.getInt("qty_stock"));
+                item.setProductType(productType.valueOf(rs.getString("product_type")));
+                item.setIdProductParent(rs.getInt("product_parent_id"));
+                list.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

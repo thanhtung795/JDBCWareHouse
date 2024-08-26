@@ -17,7 +17,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="f3f00122-eec8-40fc-942e-da1bfe6db3b5">
-      <console name="Connection" type="STANDARD" schema="warehousevitamin" session="Main"><![CDATA[select  * from product]]></console>
+      <console name="Connection" type="STANDARD" schema="warehousevitamin" session="Main"><![CDATA[select  * from product where id = 1 and = 'item']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -38,6 +38,9 @@
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/Connection.sql" connection-id="f3f00122-eec8-40fc-942e-da1bfe6db3b5" session-id="MAIN" current-schema="warehousevitamin" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />

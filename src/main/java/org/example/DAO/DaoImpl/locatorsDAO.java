@@ -45,7 +45,14 @@ public class locatorsDAO implements WareHouseRepository<locators> {
             " create_by,\n" +
             " warehouse_id\n" +
             " from locators where id = ?";
+    private static final String SELECT_LOCATORS_BY_NAME = "SELECT * FROM locators WHERE name LIKE ?";
 
+    private static final String SortByX_XYZ_desc = "SELECT *\n" +
+            " FROM locators\n" +
+            " ORDER BY x desc, y desc, z desc;";
+    private static final String SortByX_XYZ_asc = "SELECT *\n" +
+            " FROM locators\n" +
+            " ORDER BY x asc, y asc, z asc;";
     @Override
     public void insert(locators locators) {
         try {
@@ -144,5 +151,72 @@ public class locatorsDAO implements WareHouseRepository<locators> {
         }
         return Optional.empty();
     }
+    public List<locators> getByName(String name) {
+        List<locators> list = new ArrayList();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(SELECT_LOCATORS_BY_NAME,
+                     "%" + name +"%");
+            while (rs.next()) {
+                locators locators = new locators();
+                locators.setId(rs.getInt("id"));
+                locators.setName(rs.getString("name"));
+                locators.setActive(rs.getBoolean("is_active"));
+                locators.setX(rs.getDouble("x"));
+                locators.setY(rs.getDouble("y"));
+                locators.setZ(rs.getDouble("z"));
+                locators.setCreated(rs.getTimestamp("created"));
+                locators.setCreateBy(rs.getString("create_by"));
+                locators.setIdWareHouse(rs.getInt("warehouse_id"));
+               list.add(locators);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
+    public List<locators> sortListAsc(){
+        List<locators> list = new ArrayList();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(SortByX_XYZ_asc);
+            while (rs.next()) {
+                locators locators = new locators();
+                locators.setId(rs.getInt("id"));
+                locators.setName(rs.getString("name"));
+                locators.setActive(rs.getBoolean("is_active"));
+                locators.setX(rs.getDouble("x"));
+                locators.setY(rs.getDouble("y"));
+                locators.setZ(rs.getDouble("z"));
+                locators.setCreated(rs.getTimestamp("created"));
+                locators.setCreateBy(rs.getString("create_by"));
+                locators.setIdWareHouse(rs.getInt("warehouse_id"));
+                list.add(locators);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public List<locators> sortListDesc(){
+        List<locators> list = new ArrayList();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(SortByX_XYZ_desc);
+            while (rs.next()) {
+                locators locators = new locators();
+                locators.setId(rs.getInt("id"));
+                locators.setName(rs.getString("name"));
+                locators.setActive(rs.getBoolean("is_active"));
+                locators.setX(rs.getDouble("x"));
+                locators.setY(rs.getDouble("y"));
+                locators.setZ(rs.getDouble("z"));
+                locators.setCreated(rs.getTimestamp("created"));
+                locators.setCreateBy(rs.getString("create_by"));
+                locators.setIdWareHouse(rs.getInt("warehouse_id"));
+                list.add(locators);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

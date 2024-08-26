@@ -40,6 +40,9 @@ public class productComBoDAO implements WareHouseRepository<productComBo> {
     private static final String delete_product_combo = " delete from product" +
             " where id = ? and product_type = ?";
     private static final String selectById = "SELECT * FROM product WHERE id = ?";
+
+    private  static  final String select_produtsCombo_ASC = "SELECT * FROM product where product_type = ? order by qty_stock asc";
+    private  static  final String select_produtsCombo_DeSC = "SELECT * FROM product where product_type = ? order by qty_stock desc";
     @Override
     public void insert(productComBo productComBo) {
         try {
@@ -148,5 +151,51 @@ public class productComBoDAO implements WareHouseRepository<productComBo> {
             e.printStackTrace();
         }
         return Optional.ofNullable(item);
+    }
+    public  List<productComBo> getItemSortAsc(){
+        List<productComBo> list = new ArrayList<>();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(select_produtsCombo_ASC,
+                    productType.combo.toString()
+            );
+            while (rs.next()) {
+                productComBo item = new productComBo();
+                item.setId(rs.getInt("id"));
+                item.setName(rs.getString("name"));
+                item.setActive(rs.getBoolean("is_active"));
+                item.setIdlocator(rs.getInt("locator_id"));
+                item.setCreated(rs.getTimestamp("created"));
+                item.setQtyStock(rs.getInt("qty_stock"));
+                item.setProductType(productType.valueOf(rs.getString("product_type")));
+                item.setIdProductParent(rs.getInt("product_parent_id"));
+                list.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public  List<productComBo> getItemSortDesc(){
+        List<productComBo> list = new ArrayList<>();
+        try {
+            ResultSet rs = JpaHelper.executeQuery(select_produtsCombo_DeSC,
+                    productType.combo.toString()
+            );
+            while (rs.next()) {
+                productComBo item = new productComBo();
+                item.setId(rs.getInt("id"));
+                item.setName(rs.getString("name"));
+                item.setActive(rs.getBoolean("is_active"));
+                item.setIdlocator(rs.getInt("locator_id"));
+                item.setCreated(rs.getTimestamp("created"));
+                item.setQtyStock(rs.getInt("qty_stock"));
+                item.setProductType(productType.valueOf(rs.getString("product_type")));
+                item.setIdProductParent(rs.getInt("product_parent_id"));
+                list.add(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

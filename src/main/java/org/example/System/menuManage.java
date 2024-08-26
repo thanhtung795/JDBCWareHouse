@@ -1,9 +1,6 @@
 package org.example.System;
 
-import org.example.controller.ctrlImpl.ctrlLocators;
-import org.example.controller.ctrlImpl.ctrlProductCombo;
-import org.example.controller.ctrlImpl.ctrlProductItem;
-import org.example.controller.ctrlImpl.ctrlWareHouse;
+import org.example.controller.ctrlImpl.*;
 
 import java.util.Scanner;
 
@@ -13,6 +10,7 @@ public class menuManage {
     static ctrlLocators ctrlLocators = new ctrlLocators();
     static ctrlProductCombo productCombo = new ctrlProductCombo();
     static ctrlProductItem productItem = new ctrlProductItem();
+    static ctrlProducts products = new ctrlProducts();
     // Main Menu
     public void menuMain() {
         System.out.println("|======= System Menu =======|");
@@ -31,6 +29,7 @@ public class menuManage {
         System.out.println("|2. Add a Ware House            |");
         System.out.println("|3. Update ware house           |");
         System.out.println("|4. Delete ware house           |");
+        System.out.println("|5. Search ware house           |");
         System.out.println("|5. Exit                        |");
         System.out.println("|===============================|");
         System.out.print("Select a function: ");
@@ -55,6 +54,9 @@ public class menuManage {
                     ctrlWarehouse.delete();
                     break;
                 case 5:
+                    ctrlWarehouse.getWareHouseByName();
+                    break;
+                case 6:
                     running = false;
                     System.out.println("You have returned to the main menu.");
                     break;
@@ -71,7 +73,10 @@ public class menuManage {
         System.out.println("|2. Add a locator             |");
         System.out.println("|3. Update locator            |");
         System.out.println("|4. Delete locator            |");
-        System.out.println("|5. Exit                      |");
+        System.out.println("|5. Search locator            |");
+        System.out.println("|6. View all locators asc     |");
+        System.out.println("|7. View all locators Desc    |");
+        System.out.println("|8. Exit                      |");
         System.out.println("|=============================|");
         System.out.print("Select a function: ");
     }
@@ -95,6 +100,15 @@ public class menuManage {
                     ctrlLocators.delete();
                     break;
                 case 5:
+                    ctrlLocators.getLocatorsByName();
+                    break;
+                case 6:
+                    ctrlLocators.getLocatorsSort("asc");
+                    break;
+                case 7:
+                    ctrlLocators.getLocatorsSort("desc");
+                    break;
+                case 8:
                     running = false;
                     System.out.println("You have returned to the main menu.");
                     break;
@@ -109,7 +123,9 @@ public class menuManage {
         System.out.println("|======= Menu Product =======|");
         System.out.println("|1. Manage product combo     |");
         System.out.println("|2. Manage product item      |");
-        System.out.println("|3. Exit                     |");
+        System.out.println("|3. Views all product asc    |");
+        System.out.println("|4. Views all product desc   |");
+        System.out.println("|5. Exit                     |");
         System.out.println("|============================|");
         System.out.print("Select a function: ");
     }
@@ -127,6 +143,12 @@ public class menuManage {
                     runProductItem();
                     break;
                 case 3:
+                    products.listSortAsc();
+                    break;
+                case 4:
+                    products.listSortDesc();
+                    break;
+                case 5:
                     running = false;
                     System.out.println("You have returned to the main menu.");
                     break;
@@ -143,7 +165,9 @@ public class menuManage {
         System.out.println("|2. Add a product combo            |");
         System.out.println("|3. Update product combo           |");
         System.out.println("|4. Delete product combo           |");
-        System.out.println("|5. Exit                           |");
+        System.out.println("|5. View combo sort asc            |");
+        System.out.println("|6. View combo sort Desc           |");
+        System.out.println("|7. Exit                           |");
         System.out.println("|==================================|");
         System.out.print("Select a function: ");
     }
@@ -167,6 +191,12 @@ public class menuManage {
                     productCombo.delete();
                     break;
                 case 5:
+                    productCombo.listSortAsc();
+                    break;
+                case 6:
+                    productCombo.listSortDesc();
+                    break;
+                case 7:
                     running = false;
                     System.out.println("You have returned to the menu product.");
                     break;
@@ -183,7 +213,10 @@ public class menuManage {
         System.out.println("|2. Add a product Item            |");
         System.out.println("|3. Update product Item           |");
         System.out.println("|4. Delete product Item           |");
-        System.out.println("|5. Exit                          |");
+        System.out.println("|5. View items by id              |");
+        System.out.println("|6. View items sort asc           |");
+        System.out.println("|7. View items sort Desc          |");
+        System.out.println("|8. Exit                          |");
         System.out.println("|=================================|");
         System.out.print("Select a function: ");
     }
@@ -205,7 +238,17 @@ public class menuManage {
                     break;
                 case 4:
                     productItem.delete();
+                    break;
                 case 5:
+                    productItem.listItemById();
+                    break;
+                case 6:
+                    productItem.listSortAsc();
+                    break;
+                case 7:
+                    productItem.listSortDesc();
+                    break;
+                case 8:
                     running = false;
                     System.out.println("You have returned to the menu product.");
                     break;
