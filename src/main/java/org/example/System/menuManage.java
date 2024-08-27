@@ -17,7 +17,7 @@ public class menuManage {
         System.out.println("|1. Manage ware house       |");
         System.out.println("|2. Manage locators         |");
         System.out.println("|3. Manage product          |");
-        System.out.println("|5. Exit                    |");
+        System.out.println("|4. Exit                    |");
         System.out.println("|===========================|");
         System.out.print("Select a function: ");
     }
@@ -30,7 +30,7 @@ public class menuManage {
         System.out.println("|3. Update ware house           |");
         System.out.println("|4. Delete ware house           |");
         System.out.println("|5. Search ware house           |");
-        System.out.println("|5. Exit                        |");
+        System.out.println("|6. Exit                        |");
         System.out.println("|===============================|");
         System.out.print("Select a function: ");
     }
@@ -274,7 +274,7 @@ public class menuManage {
                 case 3:
                     runProduct();
                     break;
-                case 5:
+                case 4:
                     running = false;
                     System.out.println("You have exited the system.");
                     break;
